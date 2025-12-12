@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoloSec | Sovereign Encryption Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@300;400;600;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://gumroad.com/js/gumroad.js"></script>
+    
+    <style>
+        /* --- GLOBAL PHYSICS --- */
+        :root {
+            --neon: #00FF41;
+            --alert: #ff3333;
+            --void: #050505;
+            /* GLASS SETTINGS: Tuned for maximum "Ghost in the Machine" vibe */
+            --glass: rgba(10, 10, 10, 0.5); 
+            --card-bg: rgba(20, 20, 20, 0.4);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--void);
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .nav-logo { font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; }
+        
+        /* --- BACKGROUND LAYERS --- */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1; 
+            opacity: 0.25; 
+        }
+        
+        #bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -2; 
+            
+            /* FIXED: Ensures logo fits vertically without cropping */
+            max-width: 80vw;
+            max-height: 85vh; 
+            width: auto;
+            height: auto;
+            
+            opacity: 0.3; 
+            pointer-events: none;
+            mix-blend-mode: screen; 
+            filter: contrast(1.1) brightness(1.2); 
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-logo { font-weight: 700; font-size: 1.5rem; letter-spacing: -1px; color: white; position: relative;}
+        .nav-logo span { color: var(--neon); }
+        .nav-logo:hover { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; color: var(--neon); }
+        
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { 
+            color: #888; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--neon); text-shadow: 0 0 10px var(--neon); }
+
+        .nav-cta {
+            padding: 10px 25px;
+            background: transparent;
+            border: 1px solid var(--neon);
+            color: var(--neon);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0,255,65,0.1);
+        }
+        .nav-cta:hover { background: var(--neon); color: black; box-shadow: 0 0 20px var(--neon); }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .system-badge {
+            border: 1px solid var(--neon);
+            color: var(--neon);
+            padding: 5px 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 25px;
+            background: rgba(0, 255, 65, 0.05);
+            letter-spacing: 2px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 6rem);
+            line-height: 0.9;
+            margin-bottom: 25px;
+            color: white;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+        .hero h1 span { color: var(--neon); }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #ccc;
+            max-width: 650px;
+            margin-bottom: 50px;
+            text-shadow: 0 2px 4px black;
+        }
+
+        .hero-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;}
+        
+        .btn-primary {
+            padding: 20px 50px;
+            background: var(--neon);
+            color: black;
+            font-weight: 900;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border: none;
+            font-family: 'Space Grotesk';
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(0,255,65,0.4); }
+
+        .btn-secondary {
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #444;
+            color: white;
+            font-weight: 900;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: 0.3s;
+            font-family: 'Space Grotesk';
+            backdrop-filter: blur(5px);
+        }
+        .btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+        /* --- PERFORMANCE STRIP --- */
+        .perf-strip {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+            background: rgba(0,0,0,0.3);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+        }
+        .perf-item {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-right: 1px solid var(--border);
+        }
+        .perf-item:last-child { border-right: none; }
+        .perf-val { font-family: 'Space Grotesk'; font-size: 1.5rem; color: #fff; font-weight: bold; }
+        .perf-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px;}
+
+        /* --- TERMINAL --- */
+        .terminal-section {
+            padding: 60px 20px;
+            background: transparent; 
+            display: flex;
+            justify-content: center;
+        }
+        .terminal-window {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(10, 10, 10, 0.85); 
+            border: 1px solid #333;
+            border-radius: 5px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            font-family: 'Share Tech Mono', monospace;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .terminal-header {
+            background: rgba(30, 30, 30, 0.8);
+            padding: 10px 15px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+        .term-title { color: #888; font-size: 0.8rem; margin-left: 10px; }
+
+        .terminal-body {
+            padding: 20px;
+            height: 200px;
+            overflow: hidden;
+            color: var(--neon);
+            font-size: 0.9rem;
+            position: relative;
+        }
+        .log-line { margin-bottom: 5px; opacity: 0.8; }
+        .cursor { display: inline-block; width: 8px; height: 15px; background: var(--neon); animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* --- SECTORS --- */
+        .sectors-section {
+            padding: 100px 5%;
+            background: rgba(0, 0, 0, 0.2); 
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .sector-title { color: #555; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 50px; text-transform: uppercase; }
+        
+        .sectors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .sector-card {
+            background: var(--card-bg); 
+            border: 1px solid var(--border);
+            padding: 40px 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            backdrop-filter: blur(8px); 
+        }
+        
+        .sector-card:hover {
+            border-color: var(--neon);
+            transform: translateY(-10px);
+            background: rgba(30, 30, 30, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.1);
+        }
+        
+        .sector-icon { font-size: 3rem; color: #444; margin-bottom: 20px; transition: 0.3s; }
+        .sector-card:hover .sector-icon { color: var(--neon); }
+        
+        .sector-name { color: #fff; font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; letter-spacing: 1px; }
+        
+        .sector-detail {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            opacity: 0;
+            max-height: 0;
+            transition: all 0.4s ease;
+            margin-top: 0;
+        }
+        
+        .sector-card:hover .sector-detail {
+            opacity: 1;
+            max-height: 100px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #444;
+        }
+
+        /* --- THE THREAT --- */
+        .section-dark {
+            padding: 100px 5%;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.4); 
+            backdrop-filter: blur(5px);
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        .threat-text h2 { font-size: 2.5rem; margin-bottom: 20px; color: white; }
+        .threat-text p { color: #ccc; margin-bottom: 20px; line-height: 1.6; }
+        
+        .binary-logic-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border);
+        }
+        .binary-logic { margin-bottom: 15px; }
+        .binary-logic:last-child { margin-bottom: 0; }
+        .binary-title { color: #fff; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; font-size: 0.8rem;}
+        .binary-bar { height: 6px; background: #333; margin-bottom: 5px; position: relative; border-radius: 4px; overflow: hidden;}
+        .binary-fill { height: 100%; background: var(--alert); width: 60%; }
+        .binary-fill.neon { background: var(--neon); width: 100%; }
+        .binary-label { font-size: 0.75rem; color: #888; display: flex; justify-content: space-between;}
+
+        /* STATS HIDDEN AS REQUESTED */
+        .stats-divider, .stats-row { display: none; }
+
+        .threat-visual { text-align:center; }
+
+        /* --- ENGINE TIMELINE (MOD 5) --- */
+        .timeline-section {
+            padding: 100px 5%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: transparent;
+        }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-header h2 { font-size: 3rem; margin-bottom: 10px; text-shadow: 0 0 20px black; }
+        .section-header span { color: var(--neon); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; font-weight: bold; background: rgba(0,0,0,0.6); padding: 5px 10px;}
+
+        .timeline-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+            border-left: 2px solid var(--neon);
+            padding-left: 30px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--neon);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon);
+        }
+        .step-num { font-size: 1.5rem; color: #fff; font-weight: 900; min-width: 40px; }
+        .step-content h3 { font-size: 1.5rem; color: white; margin-bottom: 10px; text-shadow: 0 0 10px black; }
+        .step-content p { color: #ccc; text-shadow: 0 2px 5px black; }
+
+        /* --- ARSENAL --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-box {
+            background: var(--card-bg);
+            padding: 40px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .feature-box:hover { border-color: var(--neon); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: rgba(20,20,20,0.6); }
+        .feature-box i { font-size: 2rem; color: var(--neon); margin-bottom: 20px; }
+        .feature-box h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .feature-box p { font-size: 0.9rem; color: #999; }
+
+        /* --- BATTLE CARD --- */
+        .comparison-section {
+            padding: 100px 5%;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+        }
+        .comparison-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+        .comparison-table th { color: #888; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .comparison-table th.highlight { color: var(--neon); font-size: 1.2rem; border-bottom: 2px solid var(--neon); }
+        .comparison-table td { color: #ccc; font-size: 0.95rem; }
+        .comparison-table td:first-child { text-align: left; color: #fff; font-weight: bold; font-size: 1rem;}
+        
+        .spec-good { color: var(--neon); }
+        .spec-bad { color: #555; text-decoration: line-through; }
+        .spec-mid { color: #888; }
+
+        /* --- PRICING --- */
+        .pricing-section {
+            padding: 120px 5%;
+            background: transparent;
+            border-top: 1px solid var(--border);
+        }
+        .price-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .price-card {
+            background: rgba(10, 10, 10, 0.7);
+            border: 1px solid #333;
+            padding: 50px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        .price-card.syndicate { 
+            border: 2px solid var(--neon); 
+            background: rgba(15, 20, 15, 0.8); 
+            box-shadow: 0 0 50px rgba(0, 255, 65, 0.05);
+        }
+        .p-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--neon);
+            color: black;
+            padding: 4px 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .p-title { font-size: 1.5rem; color: #666; margin-bottom: 20px; letter-spacing: 2px; }
+        .p-cost { font-size: 4rem; color: white; font-weight: 700; margin-bottom: 10px; font-family: 'Space Grotesk'; }
+        .p-sub { color: #555; margin-bottom: 40px; font-size: 0.9rem; }
+        .p-list { list-style: none; margin-bottom: 40px; }
+        .p-list li { margin-bottom: 15px; color: #bbb; display: flex; align-items: center; gap: 10px; }
+        .p-list i { color: var(--neon); font-size: 0.8rem; }
+
+        .guarantee-badge {
+            margin-top: 20px;
+            text-align: center;
+            color: #888;
+            font-size: 0.8rem;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+        .syndicate .btn-block { background: var(--neon); color: black; border: none; }
+        .btn-block:hover { opacity: 0.9; }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 80px 5%;
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid #222;
+            text-align: center;
+            color: #444;
+        }
+        .footer-logo { font-size: 2rem; color: #fff; font-family: 'Space Grotesk'; margin-bottom: 20px; display: inline-block; }
+        .footer-links a { color: #666; margin: 0 15px; text-decoration: none; cursor: pointer;}
+        .footer-links a:hover { color: var(--neon); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            h1 { font-size: 3rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .comparison-table { font-size: 0.7rem; }
+            .stats-row { flex-direction: column; gap: 20px;}
+            .perf-strip { flex-direction: column; }
+            .perf-item { border-right: none; border-bottom: 1px solid #222; padding: 10px;}
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix-canvas"></canvas>
+    <img src="logo.png" id="bg-logo" alt="HoloSec Background Logo">
+
+    <nav>
+        <div class="nav-logo">HOLO<span>SEC</span></div>
+        <div class="nav-links">
+            <a href="#threat">THE THREAT</a>
+            <a href="#engine">THE ENGINE</a>
+            <a href="#arsenal">ARSENAL</a>
+            <a href="#pricing">CLEARANCE</a>
+        </div>
+        <a href="https://holosec.gumroad.com/l/oemsfb?option=RZveiGqfCszJi99lAUPWTQ%3D%3D&wanted=true" class="nav-cta">GET ACCESS</a>
+    </nav>
+
+    <section class="hero">
+        <div class="system-badge">
+            <i class="fas fa-circle" style="color:var(--neon); font-size:0.6rem; margin-right:5px;"></i> SYSTEM STATUS: ONLINE
+        </div>
+        <h1>THE STATIC AGE<br>IS <span style="color:var(--neon)">OVER</span>.</h1>
+        <p>Quantum computers will shatter standard encryption. HoloSec rotates your keys every 60 seconds <strong>and every single keystroke</strong>. Lightweight. Offline. Deadly.</p>
+        
+        <div class="hero-btns">
+            <a href="https://holosec.gumroad.com/l/oemsfb?option=RZveiGqfCszJi99lAUPWTQ%3D%3D&wanted=true" class="btn-primary">SECURE YOUR SOVEREIGNTY</a>
+            <a href="#engine" class="btn-secondary">VIEW ARCHITECTURE</a>
+        </div>
+    </section>
+
+    <div class="perf-strip">
+        <div class="perf-item">
+            <div class="perf-val">100%</div>
+            <div class="perf-label">Offline Architecture</div>
+        </div>
+        <div class="perf-item">
+            <div class="perf-val">&lt;1%</div>
+            <div class="perf-label">CPU Footprint</div>
+        </div>
+        <div class="perf-item">
+            <div class="perf-val">Geometric Core</div>
+            <div class="perf-label">Dynamic Permutation</div>
+        </div>
+        <div class="perf-item">
+            <div class="perf-val">Air-Gap Ready</div>
+            <div class="perf-label">Zero Attack Surface</div>
+        </div>
+    </div>
+
+    <section class="terminal-section">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <div class="term-title">holosec_engine.py --admin</div>
+            </div>
+            <div class="terminal-body" id="term-body">
+                <div class="log-line">> Initializing HoloSec Core...</div>
+                <div class="log-line">> Verifying Network Status... OFFLINE [Confirmed]</div>
+                <div class="log-line">> Generating Initial Geometry... DYNAMIC_LATTICE_V2</div>
+                <div class="log-line">> Vault Status: <span style="color:#fff">LOCKED</span></div>
+                <span class="cursor"></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="sectors-section">
+        <div class="sector-title">OPERATIONAL ENVIRONMENTS (HOVER TO SCAN)</div>
+        <div class="sectors-grid">
+            
+            <div class="sector-card">
+                <i class="fas fa-landmark sector-icon"></i>
+                <div class="sector-name">Finance</div>
+                <div class="sector-detail">Cold storage for high-value ledgers and tax data. Immune to cloud leaks.</div>
+            </div>
+            
+            <div class="sector-card">
+                <i class="fas fa-balance-scale sector-icon"></i>
+                <div class="sector-name">Legal</div>
+                <div class="sector-detail">Attorney-client privilege requires zero third-party access. Subpoena-proof storage.</div>
+            </div>
+            
+            <div class="sector-card">
+                <i class="fab fa-bitcoin sector-icon"></i>
+                <div class="sector-name">Crypto</div>
+                <div class="sector-detail">The ultimate seed phrase bunker. If they can't access the vault, they can't drain the wallet.</div>
+            </div>
+            
+            <div class="sector-card">
+                <i class="fas fa-newspaper sector-icon"></i>
+                <div class="sector-name">Journalism</div>
+                <div class="sector-detail">Protect sources. Panic wipe ensures data is unrecoverable if equipment is seized.</div>
+            </div>
+            
+            <div class="sector-card">
+                <i class="fas fa-oil-well sector-icon"></i>
+                <div class="sector-name">Energy</div>
+                <div class="sector-detail">Industrial IP protection. Keep schematics offline, rotated, and compliant.</div>
+            </div>
+
+            <div class="sector-card">
+                <i class="fas fa-user-md sector-icon"></i>
+                <div class="sector-name">Healthcare</div>
+                <div class="sector-detail">HIPAA data sovereignty. Patient records remain local and encrypted at rest.</div>
+            </div>
+
+            <div class="sector-card">
+                <i class="fas fa-code sector-icon"></i>
+                <div class="sector-name">Developers</div>
+                <div class="sector-detail">Protect proprietary source code and API keys from repository hacks.</div>
+            </div>
+
+            <div class="sector-card">
+                <i class="fas fa-shield-alt sector-icon"></i>
+                <div class="sector-name">Defense</div>
+                <div class="sector-detail">ITAR/CUI compliant architecture. Designed for air-gapped workstations.</div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="threat" class="section-dark">
+        <div class="grid-2">
+            <div class="threat-text">
+                <h2>THE BRUTE FORCE DILEMMA.</h2>
+                <p>Standard encryption allows hackers to chip away at your password for years. They can be "50% close" to cracking it. It is a waiting game.</p>
+                <p>HoloSec introduces the <strong>Binary Logic Rule</strong>. Because the key rotates, any progress made by a hacker is wiped clean every session. You are either 100% in, or 100% out.</p>
+                
+                <div class="binary-logic-container">
+                    <div class="binary-logic">
+                        <div class="binary-title">STATIC KEY (BITLOCKER)</div>
+                        <div class="binary-bar"><div class="binary-fill"></div></div>
+                        <div class="binary-label"><span>Vulnerable to Partial Decryption</span> <span style="color:var(--alert)">RISK DETECTED</span></div>
+                    </div>
+                    <div class="binary-logic">
+                        <div class="binary-title">DYNAMIC KEY (HOLOSEC)</div>
+                        <div class="binary-bar"><div class="binary-fill neon"></div></div>
+                        <div class="binary-label"><span>100% Right or 100% Wrong</span> <span style="color:var(--neon)">SECURE</span></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="threat-visual" style="text-align:center;">
+                <i class="fas fa-network-wired" style="font-size: 10rem; color: #222;"></i>
+                <div style="margin-top:-50px;"><i class="fas fa-lock-open" style="font-size: 4rem; color: var(--alert);"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="engine" class="timeline-section">
+        <div class="section-header">
+            <span>PROPRIETARY ARCHITECTURE</span>
+            <h2>DYNAMIC GEOMETRY</h2>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="step-num">01</div>
+            <div class="step-content">
+                <h3>The Vault is Decoupled</h3>
+                <p>Your keys are never stored in the file header. They live in a separate, local Python vault. The file is useless without the vault.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="step-num">02</div>
+            <div class="step-content">
+                <h3>The Lattice Rotates</h3>
+                <p>The geometry shifts with <strong>every single keystroke</strong>. When idle, the lattice auto-rotates every 60 seconds. Yesterday's key will not open today's lock.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="step-num">03</div>
+            <div class="step-content">
+                <h3>Anti-Forensic Scrubbing</h3>
+                <p>The "Crowbar" engine automatically strips metadata and falsifies file creation dates. Your files blend into the digital noise.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="step-num">04</div>
+            <div class="step-content">
+                <h3>Volatile RAM Execution</h3>
+                <p>Keys exist only in RAM. If power is cut, the keys vanish and the <strong>Vault locks instantly</strong>. Your files are safe on the drive, but unreadable to anyone else.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="step-num">05</div>
+            <div class="step-content">
+                <h3>Panic Protocol</h3>
+                <p>One click. The vault is vaporized. Because the keys were decoupled, your files are instantly, mathematically orphaned.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="arsenal" class="section-dark">
+        <div class="section-header">
+            <span>TECHNICAL SPECIFICATIONS</span>
+            <h2 style="color:white;">THE ARSENAL</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-box">
+                <i class="fas fa-user-secret"></i>
+                <h3>Dark Forest Ops</h3>
+                <p>No telemetry. No cloud backups. We don't know your email. We don't know your keys.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-hdd"></i>
+                <h3>Portable Ballistics</h3>
+                <p>Runs entirely from a USB drive. No installation required. Leave no trace on the host machine.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-microchip"></i>
+                <h3>Zero-Drag Efficiency</h3>
+                <p>Engineered for speed. Minimal CPU footprint. No heavy background processes draining battery or gaming performance.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Local Sovereignty</h3>
+                <p>Works on Windows 10/11. Does not require an internet connection to encrypt/decrypt.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-fingerprint"></i>
+                <h3>Identity Defense</h3>
+                <p>Perfect for storing seed phrases, tax returns, and legal documents.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-file-contract"></i>
+                <h3>Patent Pending</h3>
+                <p>Protected IP (U.S. App No. 63/924,557). Unique to HoloSec.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section">
+        <div class="section-header">
+            <span>MARKET DOMINANCE</span>
+            <h2>THE BATTLE CARD</h2>
+        </div>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>SPECIFICATION</th>
+                    <th class="highlight">HOLOSEC</th>
+                    <th>BITLOCKER</th>
+                    <th>CLOUD STORAGE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Encryption Topology</td>
+                    <td class="spec-good">Dynamic (Rotating)</td>
+                    <td class="spec-mid">Static (Fixed)</td>
+                    <td class="spec-bad">Managed (Shared)</td>
+                </tr>
+                <tr>
+                    <td>Key Storage Location</td>
+                    <td class="spec-good">Decoupled Vault</td>
+                    <td class="spec-mid">File Header</td>
+                    <td class="spec-bad">Their Servers</td>
+                </tr>
+                <tr>
+                    <td>Forensic Footprint</td>
+                    <td class="spec-good">Zero (Scrubbed)</td>
+                    <td class="spec-mid">High (Logged)</td>
+                    <td class="spec-bad">Total (Tracked)</td>
+                </tr>
+                <tr>
+                    <td>Recovery Vector</td>
+                    <td class="spec-good">None (Absolute)</td>
+                    <td class="spec-mid">Recovery Key</td>
+                    <td class="spec-bad">"Forgot Password"</td>
+                </tr>
+                <tr>
+                    <td>Brute Force Defense</td>
+                    <td class="spec-good">Time-Dependent</td>
+                    <td class="spec-bad">Vulnerable</td>
+                    <td class="spec-bad">Vulnerable</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <div class="section-header">
+            <span>ACQUIRE LICENSE</span>
+            <h2 style="color:white;">SELECT CLEARANCE</h2>
+        </div>
+        
+        <div class="price-container">
+            <div class="price-card">
+                <div class="p-title">OPERATIVE</div>
+                <div class="p-cost">$149</div>
+                <div class="p-sub">Lifetime Personal License</div>
+                <ul class="p-list">
+                    <li><i class="fas fa-check"></i> 2 Machine Seats</li>
+                    <li><i class="fas fa-check"></i> Dynamic Engine</li>
+                    <li><i class="fas fa-check"></i> Panic Wipe Protocol</li>
+                    <li><i class="fas fa-check"></i> Community Support</li>
+                </ul>
+                <a href="https://holosec.gumroad.com/l/oemsfb?option=RZveiGqfCszJi99lAUPWTQ%3D%3D&wanted=true" class="btn-block">GET ACCESS</a>
+                <div class="guarantee-badge"><i class="fas fa-shield-alt"></i> 14-Day Money Back Guarantee</div>
+            </div>
+
+            <div class="price-card syndicate">
+                <div class="p-badge">RECOMMENDED</div>
+                <div class="p-title">SYNDICATE</div>
+                <div class="p-cost">$999</div>
+                <div class="p-sub">Lifetime Enterprise License</div>
+                <ul class="p-list">
+                    <li><i class="fas fa-check"></i> <strong>18 Machine Seats</strong></li>
+                    <li><i class="fas fa-check"></i> Commercial Rights</li>
+                    <li><i class="fas fa-check"></i> Priority Email Support</li>
+                    <li><i class="fas fa-check"></i> Tax Deductible</li>
+                </ul>
+                <a href="https://holosec.gumroad.com/l/oemsfb?option=9VwbFP8aFiq33bwroyn3jw%3D%3D&wanted=true" class="btn-block">DEPLOY TO SYNDICATE</a>
+                <div class="guarantee-badge"><i class="fas fa-shield-alt"></i> 14-Day Money Back Guarantee</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">HOLO<span>SEC</span></div>
+        <div class="footer-links">
+            <a href="https://holosec.gumroad.com/l/oemsfb?option=RZveiGqfCszJi99lAUPWTQ%3D%3D&wanted=true">Buy Now</a>
+            <a onclick="applyAffiliate()">Affiliates</a>
+            <a href="mailto:holosecurity@proton.me">Contact</a>
+        </div>
+        <br><br>
+        <p style="font-size:0.8rem;">© 2025 HoloSec. All rights reserved. Patent Pending 63/924,557.</p>
+    </footer>
+
+    <script>
+        // AFFILIATE MAILTO GENERATOR
+        function applyAffiliate() {
+            const subject = "AFFILIATE PARTNER REQUEST";
+            const body = "Name:%0D%0AWebsite/Channel:%0D%0AEstimated Volume:%0D%0APromotion Strategy:%0D%0A";
+            window.location.href = `mailto:holosecurity@proton.me?subject=${subject}&body=${body}`;
+        }
+
+        // MATRIX EFFECT
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        for(let i = 0; i < columns; i++) drops[i] = 1;
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(5, 5, 5, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0F0";
+            ctx.font = fontSize + "px monospace";
+
+            for(let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 33);
+
+        // TERMINAL TYPING EFFECT
+        const termBody = document.getElementById('term-body');
+        const messages = [
+            "> Rotating Keys... [Sector 7]",
+            "> Scrubbing Metadata... Done.",
+            "> Panic Protocol... ARMED.",
+            "> Threat Detected: NONE.",
+            "> Encryption Strength: QUANTUM-RESISTANT"
+        ];
+        let msgIndex = 0;
+
+        function addLog() {
+            if(msgIndex < messages.length) {
+                const div = document.createElement('div');
+                div.className = 'log-line';
+                div.innerText = messages[msgIndex];
+                termBody.insertBefore(div, termBody.lastElementChild);
+                msgIndex++;
+            } else {
+                msgIndex = 0; // Loop
+                termBody.innerHTML = '<div class="log-line">> System Reloading...</div><span class="cursor"></span>';
+            }
+        }
+        setInterval(addLog, 2000);
+    </script>
+
+</body>
+</html>
