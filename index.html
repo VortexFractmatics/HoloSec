@@ -14,7 +14,6 @@
             --neon: #00FF41;
             --alert: #ff3333;
             --void: #050505;
-            /* GLASS SETTINGS: Tuned for maximum "Ghost in the Machine" vibe */
             --glass: rgba(10, 10, 10, 0.5); 
             --card-bg: rgba(20, 20, 20, 0.4);
             --border: rgba(255, 255, 255, 0.1);
@@ -48,13 +47,10 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: -2; 
-            
-            /* FIXED: Ensures logo fits vertically without cropping */
             max-width: 80vw;
             max-height: 85vh; 
             width: auto;
             height: auto;
-            
             opacity: 0.3; 
             pointer-events: none;
             mix-blend-mode: screen; 
@@ -341,8 +337,67 @@
         .binary-fill.neon { background: var(--neon); width: 100%; }
         .binary-label { font-size: 0.75rem; color: #888; display: flex; justify-content: space-between;}
 
-        /* STATS HIDDEN AS REQUESTED */
-        .stats-divider, .stats-row { display: none; }
+        /* --- SWARM / THREE BODY SECTION --- */
+        .swarm-section {
+            margin-top: 120px;
+            text-align: center;
+        }
+        
+        .swarm-formula {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Share Tech Mono', monospace;
+            color: #fff;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            font-size: 1.1rem;
+        }
+        .formula-box {
+            border: 1px solid var(--neon);
+            padding: 10px 20px;
+            background: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.1);
+            color: var(--neon);
+            text-shadow: 0 0 5px var(--neon);
+        }
+        .formula-op { color: #666; font-weight: bold; }
+
+        .swarm-hive {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(10px, 1fr));
+            gap: 4px;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            padding: 10px;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #333;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+            min-height: 100px; /* Ensure visibility */
+        }
+        /* HUD Lines */
+        .swarm-hive::before, .swarm-hive::after {
+            content: ''; position: absolute; background: var(--neon); opacity: 0.5;
+        }
+        .swarm-hive::before { top: 0; left: 0; width: 20px; height: 2px; }
+        .swarm-hive::after { bottom: 0; right: 0; width: 20px; height: 2px; }
+
+        .hive-cell {
+            height: 10px;
+            background: #111;
+            border: 1px solid #222;
+        }
+        .hive-cell.active {
+            background: var(--neon);
+            box-shadow: 0 0 5px var(--neon);
+            border-color: #fff;
+        }
+
+        .swarm-text { max-width: 800px; margin: 0 auto; }
+        .swarm-text h3 { color: var(--neon); font-size: 2.5rem; margin-bottom: 15px; letter-spacing: -1px;}
+        .swarm-text p { color: #bbb; line-height: 1.6; font-size: 1.1rem;}
 
         .threat-visual { text-align:center; }
 
@@ -516,6 +571,7 @@
             .stats-row { flex-direction: column; gap: 20px;}
             .perf-strip { flex-direction: column; }
             .perf-item { border-right: none; border-bottom: 1px solid #222; padding: 10px;}
+            .swarm-formula { font-size: 0.8rem; gap: 5px; }
         }
     </style>
 </head>
@@ -666,6 +722,28 @@
                 <div style="margin-top:-50px;"><i class="fas fa-lock-open" style="font-size: 4rem; color: var(--alert);"></i></div>
             </div>
         </div>
+
+        <div class="swarm-section">
+            <div class="swarm-text">
+                <h3>THE SWARM DEFENSE</h3>
+                <div class="swarm-formula">
+                    <div class="formula-box">[ PASSWORD ]</div>
+                    <div class="formula-op">+</div>
+                    <div class="formula-box">[ TIME_KEY ]</div>
+                    <div class="formula-op">+</div>
+                    <div class="formula-box">[ DNA ]</div>
+                    <div class="formula-op">=</div>
+                    <div class="formula-box" style="border-color:#fff; color:#fff;">[ CHAOS ]</div>
+                </div>
+                
+                <div class="swarm-hive" id="hive-grid"></div>
+
+                <p>Standard encryption is a One-Body Problem: predictable and static. HoloSec introduces the <strong>Three-Body Problem</strong> to cryptography.</p>
+                <p>By using the unique DNA state-vector of every file as a seed, the engine generates distinct, unrelated keys for every file in the batch.</p>
+                <p style="margin-top:20px; color:var(--neon); font-weight:bold; letter-spacing:1px; font-size:1.2rem;">500 FILES = 500 DISTINCT EVENT HORIZONS.</p>
+            </div>
+        </div>
+
     </section>
 
     <section id="engine" class="timeline-section">
@@ -888,6 +966,36 @@
             }
         }
         setInterval(drawMatrix, 33);
+
+        // HIVE GRID GENERATOR (SWARM EFFECT)
+        const hiveGrid = document.getElementById('hive-grid');
+        const totalCells = 240; // Dense grid
+        
+        // Generate Cells
+        for(let i=0; i<totalCells; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('hive-cell');
+            hiveGrid.appendChild(cell);
+        }
+
+        // Randomly Flicker Cells
+        function flickerHive() {
+            const cells = document.querySelectorAll('.hive-cell');
+            // Reset some
+            cells.forEach(c => {
+                if(Math.random() > 0.9) c.classList.remove('active');
+            });
+            // Activate random ones
+            const randomIndex = Math.floor(Math.random() * cells.length);
+            const randomIndex2 = Math.floor(Math.random() * cells.length);
+            const randomIndex3 = Math.floor(Math.random() * cells.length);
+            
+            cells[randomIndex].classList.add('active');
+            cells[randomIndex2].classList.add('active');
+            cells[randomIndex3].classList.add('active');
+        }
+        setInterval(flickerHive, 100);
+
 
         // TERMINAL TYPING EFFECT
         const termBody = document.getElementById('term-body');
