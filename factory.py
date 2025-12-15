@@ -4,13 +4,13 @@ import time
 
 # --- CONFIGURATION ---
 # !!! PASTE YOUR API KEY HERE !!!
-API_KEY = "PASTE_YOUR_KEY_HERE" 
+API_KEY = "AIzaSyBjeQhHQ_uH4oyTvDJgbFU52k1WT7TIa8A" 
 
 # Set this to 100 when you are ready for the full flood.
 TOTAL_POSTS = 10 
 
 genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('gemini-2.5-flash')
 
 # --- THE ENCYCLOPEDIA (GOD MODE DATA) ---
 
