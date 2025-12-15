@@ -3,17 +3,21 @@ import google.generativeai as genai
 import time
 
 # --- CONFIGURATION ---
-# !!! PASTE YOUR API KEY HERE !!!
+# !!! PASTE YOUR API KEY INSIDE THE QUOTES BELOW !!!
 API_KEY = "AIzaSyBjeQhHQ_uH4oyTvDJgbFU52k1WT7TIa8A" 
 
-# Set this to 100 when you are ready for the full flood.
-TOTAL_POSTS = 10 
+# The Tesla Number. 
+TOTAL_POSTS = 369 
+
+# Safety Delay: 4 seconds between requests prevents Google from blocking you.
+# Do not lower this number for a batch this size.
+SLEEP_TIMER = 4
 
 genai.configure(api_key=API_KEY)
+# Using the high-speed Flash engine
 model = genai.GenerativeModel('gemini-2.5-flash')
 
 # --- THE ENCYCLOPEDIA (GOD MODE DATA) ---
-
 PRODUCT_SPECS = """
 PRODUCT NAME: HoloSec // The Digital Fortress
 TYPE: Quantum-Resistant, Air-Gapped Encryption Suite.
@@ -56,6 +60,7 @@ The user is the only admin. There is no 'Forgot Password'. There is no help desk
 There is only Mathematics and Willpower.
 """
 
+# NOTE: Gumroad script is injected here for every page
 CSS = """
 <style>
     body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
@@ -67,46 +72,61 @@ CSS = """
     .content { line-height: 1.6; }
     .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
     li { margin-bottom: 10px; }
+    .gumroad-button { 
+        background-color: transparent !important; 
+        color: #00FF41 !important; 
+        border: 1px solid #00FF41 !important;
+        font-family: 'Courier New', monospace !important;
+    }
+    .gumroad-button:hover {
+        background-color: #00FF41 !important;
+        color: #000 !important;
+        box-shadow: 0 0 15px #00FF41;
+    }
 </style>
 """
 
 def generate_topics(count):
-    print(f"[*] Asking Gemini to access the HoloSec Encyclopedia...")
-    prompt = f"""
-    Read these EXTENSIVE Product Specs:
-    {PRODUCT_SPECS}
+    print(f"[*] Asking Gemini to access the HoloSec Encyclopedia for {count} topics...")
+    # We ask for batches to handle the large number
+    topics = []
+    batch_size = 20
     
-    Generate {count} unique, highly specific blog post titles that show off the diversity of this tool.
-    Mix it up:
-    - Some for "Paranoid Preppers" (Dead Man's Switch).
-    - Some for "Corporate Spies" (Steganography).
-    - Some for "Crypto Traders" (Key Sharding).
-    - Some purely technical (Dynamic Geometry).
-    
-    Format: Just the titles, one per line.
-    """
-    response = model.generate_content(prompt)
-    return response.text.strip().split('\n')
+    for i in range(0, count, batch_size):
+        print(f"   > Generating batch {i} to {i+batch_size}...")
+        prompt = f"""
+        Read these EXTENSIVE Product Specs:
+        {PRODUCT_SPECS}
+        
+        Generate {batch_size} unique, highly specific, "click-worthy" blog post titles. 
+        Focus on specific user problems (e.g. "How to hide blueprints", "The truth about Bitlocker").
+        Format: Just the titles, one per line. No numbers.
+        """
+        try:
+            response = model.generate_content(prompt)
+            batch_topics = response.text.strip().split('\n')
+            topics.extend(batch_topics)
+            time.sleep(2) # Short pause between topic batches
+        except Exception as e:
+            print(f"Error generating topics: {e}")
+            
+    return topics[:count] # Ensure we return exactly the requested amount
 
 def write_article(title):
     print(f"[*] Compiling Data for: {title}...")
     prompt = f"""
     ROLE: You are the Lead Architect of HoloSec.
-    
-    INPUT DATA:
-    {PRODUCT_SPECS}
-    {MANIFESTO}
-    
+    INPUT DATA: {PRODUCT_SPECS} {MANIFESTO}
     TASK: Write a 'Deep Dive' transmission about "{title}".
-    
     REQUIREMENTS:
-    1. BE SPECIFIC: Don't just say "it's secure." Explain HOW (e.g., "The Duress Mode creates a cryptographic fork...").
-    2. USE THE FEATURES: Reference the specific features in the specs (Decoys, Sharding, Geometry).
-    3. THE ENEMY: Explain why the "Old World" (Cloud, Big Tech) cannot do this.
-    
+    1. BE SPECIFIC: Explain HOW HoloSec solves this specific problem using the specs.
+    2. THE ENEMY: Explain why Cloud/Big Tech fails here.
+    3. CALL TO ACTION: Tell them to secure their data now.
     OUTPUT FORMAT: HTML body content only (use <h2>, <p>, <ul>).
     """
     try:
+        # THE SAFETY DELAY
+        time.sleep(SLEEP_TIMER) 
         response = model.generate_content(prompt)
         return response.text
     except Exception as e:
@@ -120,15 +140,23 @@ def main():
     topics = generate_topics(TOTAL_POSTS)
     links = []
 
+    print(f"[*] Starting Production Run: {len(topics)} Articles.")
+
     for i, topic in enumerate(topics):
         if not topic.strip(): continue
+        
         filename = f"log_{i+1:03d}.html"
         content = write_article(topic)
         
+        # HTML Template with Gumroad Script injected in HEAD
         html = f"""
         <!DOCTYPE html>
         <html>
-        <head><title>HoloSec // {topic}</title>{CSS}</head>
+        <head>
+            <title>HoloSec // {topic}</title>
+            {CSS}
+            <script src="https://gumroad.com/js/gumroad.js"></script>
+        </head>
         <body>
             <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
             <br><br>
@@ -145,22 +173,33 @@ def main():
                     </div>
                 </div>
                 <br><br>
-                <center><a href="https://holosec.gumroad.com/l/oemsfb" style="font-size:1.2em; border:2px solid #00FF41; padding:15px; display:inline-block;">ACCESS THE FORTRESS</a></center>
+                <center>
+                    <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
+                        [ ACCESS THE FORTRESS ]
+                    </a>
+                </center>
             </div>
         </body>
         </html>
         """
+        
         with open(f"transmissions/{filename}", "w", encoding="utf-8") as f:
             f.write(html)
+        
         links.append(f'<div class="log-entry"><span style="color:#555">[{i+1:03d}]</span> <a href="transmissions/{filename}">{topic}</a></div>')
-        time.sleep(2)
+        
+        # Progress update every 10 posts
+        if (i+1) % 10 == 0:
+            print(f"   >>> {i+1}/{TOTAL_POSTS} Completed.")
 
+    # Hub Template with Gumroad Script
     hub_html = f"""
     <!DOCTYPE html>
     <html>
     <head>
         <title>HoloSec // Transmissions</title>
         <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+        <script src="https://gumroad.com/js/gumroad.js"></script>
         <style>
             body {{ background-color: #050505; color: #00FF41; font-family: 'Share Tech Mono', monospace; padding: 5%; }}
             h1 {{ font-size: 3rem; margin-bottom: 40px; }}
@@ -174,14 +213,17 @@ def main():
         <a href="index.html" class="back-btn">RETURN TO ENGINE</a>
         <h1>// KNOWLEDGE_BASE</h1>
         <p>THE COMPLETE ARCHIVE OF DIGITAL SOVEREIGNTY.</p>
+        <p>TOTAL_RECORDS: {len(links)}</p>
         <br>
         {''.join(links)}
     </body>
     </html>
     """
+    
     with open("transmissions.html", "w", encoding="utf-8") as f:
         f.write(hub_html)
-    print(f"\n[SUCCESS] Encyclopedia Generated. {len(links)} entries created.")
+
+    print(f"\n[SUCCESS] The Universe Key (369) is generated. Deployment ready.")
 
 if __name__ == "__main__":
     main()
