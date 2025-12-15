@@ -1,56 +1,55 @@
-
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>HoloSec // Developers: Stop Exposing API Keys! Secure .env Files Locally, Air-Gapped.</title>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HoloSec // Panic Protocol</title>
+    <style>
+        body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
+        h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
+        a { color: #00FF41; text-decoration: none; font-weight: bold; }
+        a:hover { background: #00FF41; color: black; }
+        .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
+        .content { line-height: 1.6; }
+        .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
+        .gumroad-button { background-color: transparent !important; color: #00FF41 !important; border: 1px solid #00FF41 !important; font-family: 'Courier New', monospace !important; }
+        .gumroad-button:hover { background-color: #00FF41 !important; color: #000 !important; box-shadow: 0 0 15px #00FF41; }
+    </style>
+    <script src="https://gumroad.com/js/gumroad.js"></script>
+</head>
+<body>
+    <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
+    <br><br>
+    <div class="terminal-box">
+        <h1>The Knock at the Door: Understanding the Panic Button</h1>
+        <div class="meta">ID: 009 // CLEARANCE: BLACK_BOX</div>
+        <div class="content">
+            <h2>Milliseconds Matter</h2>
+            <p>When security is breached—whether it's a physical raid, a network intrusion, or a theft in progress—you do not have time to navigate menus. You do not have time to click "Safely Eject Hardware." You need the data gone, instantly.</p>
             
-<style>
-    body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
-    h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
-    .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
-    a { color: #00FF41; text-decoration: none; font-weight: bold; }
-    a:hover { background: #00FF41; color: black; }
-    .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
-    .content { line-height: 1.6; }
-    .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
-    li { margin-bottom: 10px; }
-    .gumroad-button { 
-        background-color: transparent !important; 
-        color: #00FF41 !important; 
-        border: 1px solid #00FF41 !important;
-        font-family: 'Courier New', monospace !important;
-    }
-    .gumroad-button:hover {
-        background-color: #00FF41 !important;
-        color: #000 !important;
-        box-shadow: 0 0 15px #00FF41;
-    }
-</style>
+            <h2>The Kill Switch Logic</h2>
+            <p>HoloSec features a global hotkey (The Panic Button). When triggered, the engine executes a three-stage sequence in under 200 milliseconds:</p>
+            <ol>
+                <li><strong>Unmount:</strong> The encrypted volume is forcibly detached from the operating system.</li>
+                <li><strong>RAM Flush:</strong> The encryption keys, which live only in Volatile RAM, are overwritten with zeros.</li>
+                <li><strong>App Termination:</strong> The HoloSec process terminates itself.</li>
+            </ol>
+            
+            <h2>Cold Boot Attack Prevention</h2>
+            <p>Because the keys are flushed from RAM instantly, even a sophisticated "Cold Boot Attack" (freezing the RAM chips to read data after power-off) is mitigated. By the time anyone touches the keyboard, the data is encrypted, the keys are vaporized, and the computer looks like a clean slate.</p>
 
-            <script src="https://gumroad.com/js/gumroad.js"></script>
-        </head>
-        <body>
-            <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
-            <br><br>
-            <div class="terminal-box">
-                <h1>Developers: Stop Exposing API Keys! Secure .env Files Locally, Air-Gapped.</h1>
-                <div class="meta">ID: 009 // CLEARANCE: BLACK_BOX</div>
-                <div class="content">
-                    <p>Signal Lost.</p>
-                    <div class="spec-box">
-                        <strong>ARCHIVE DATA:</strong><br>
-                        > MODULE: Developers<br>
-                        > PROTOCOL: Zero-Knowledge<br>
-                        > STATUS: <span style="color:#00FF41">ACTIVE</span>
-                    </div>
-                </div>
-                <br><br>
-                <center>
-                    <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
-                        [ ACCESS THE FORTRESS ]
-                    </a>
-                </center>
+            <div class="spec-box">
+                <strong>ARCHIVE DATA:</strong><br>
+                > MODULE: Panic_Switch<br>
+                > PROTOCOL: RAM_Purge<br>
+                > STATUS: <span style="color:#00FF41">ACTIVE</span>
             </div>
-        </body>
-        </html>
-        
+        </div>
+        <br><br>
+        <center>
+            <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
+                [ ACCESS THE FORTRESS ]
+            </a>
+        </center>
+    </div>
+</body>
+</html>

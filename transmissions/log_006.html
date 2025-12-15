@@ -1,56 +1,57 @@
-
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>HoloSec // Journalists: Transport Sensitive Leaks Across Borders, Undetected.</title>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HoloSec // Key Sharding</title>
+    <style>
+        body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
+        h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
+        a { color: #00FF41; text-decoration: none; font-weight: bold; }
+        a:hover { background: #00FF41; color: black; }
+        .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
+        .content { line-height: 1.6; }
+        .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
+        .gumroad-button { background-color: transparent !important; color: #00FF41 !important; border: 1px solid #00FF41 !important; font-family: 'Courier New', monospace !important; }
+        .gumroad-button:hover { background-color: #00FF41 !important; color: #000 !important; box-shadow: 0 0 15px #00FF41; }
+    </style>
+    <script src="https://gumroad.com/js/gumroad.js"></script>
+</head>
+<body>
+    <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
+    <br><br>
+    <div class="terminal-box">
+        <h1>Decentralizing Trust: The 3-of-5 Rule</h1>
+        <div class="meta">ID: 006 // CLEARANCE: BLACK_BOX</div>
+        <div class="content">
+            <h2>The Binary Risk Factor</h2>
+            <p>Security usually deals in absolutes. If you have the key, you have 100% access. If you lose the key, you have 0% access. This "Single Point of Failure" is unacceptable for high-net-worth individuals or enterprise storage.</p>
             
-<style>
-    body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
-    h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
-    .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
-    a { color: #00FF41; text-decoration: none; font-weight: bold; }
-    a:hover { background: #00FF41; color: black; }
-    .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
-    .content { line-height: 1.6; }
-    .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
-    li { margin-bottom: 10px; }
-    .gumroad-button { 
-        background-color: transparent !important; 
-        color: #00FF41 !important; 
-        border: 1px solid #00FF41 !important;
-        font-family: 'Courier New', monospace !important;
-    }
-    .gumroad-button:hover {
-        background-color: #00FF41 !important;
-        color: #000 !important;
-        box-shadow: 0 0 15px #00FF41;
-    }
-</style>
+            <h2>Shamir's Secret Sharing (SSS)</h2>
+            <p>HoloSec integrates a mathematical protocol called Shamir's Secret Sharing. It allows us to split the Master Key into "Shards." These are typically 5 distinct QR codes. </p>
+            
+            <p><strong>The Threshold:</strong> We set a recovery threshold of 3. This means:</p>
+            <ul>
+                <li>Shard 1 + Shard 2 + Shard 3 = <strong>UNLOCK</strong></li>
+                <li>Shard 1 + Shard 5 + Shard 4 = <strong>UNLOCK</strong></li>
+                <li>Shard 1 + Shard 2 only = <strong>FAIL</strong></li>
+            </ul>
+            
+            <h2>Strategic Deployment</h2>
+            <p>You can now decentralize your security physically. Put one shard in a bank box. Give one to your lawyer. Burry one in the yard. Keep one in your head. If your house burns down (destroying Shard 1), you are safe because you have the others. If a thief steals Shard 2, they are useless because they lack the others. It is the only way to be disaster-proof.</p>
 
-            <script src="https://gumroad.com/js/gumroad.js"></script>
-        </head>
-        <body>
-            <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
-            <br><br>
-            <div class="terminal-box">
-                <h1>Journalists: Transport Sensitive Leaks Across Borders, Undetected.</h1>
-                <div class="meta">ID: 006 // CLEARANCE: BLACK_BOX</div>
-                <div class="content">
-                    <p>Signal Lost.</p>
-                    <div class="spec-box">
-                        <strong>ARCHIVE DATA:</strong><br>
-                        > MODULE: Journalists<br>
-                        > PROTOCOL: Zero-Knowledge<br>
-                        > STATUS: <span style="color:#00FF41">ACTIVE</span>
-                    </div>
-                </div>
-                <br><br>
-                <center>
-                    <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
-                        [ ACCESS THE FORTRESS ]
-                    </a>
-                </center>
+            <div class="spec-box">
+                <strong>ARCHIVE DATA:</strong><br>
+                > MODULE: Shard_Distribution<br>
+                > PROTOCOL: Shamir_Threshold<br>
+                > STATUS: <span style="color:#00FF41">ACTIVE</span>
             </div>
-        </body>
-        </html>
-        
+        </div>
+        <br><br>
+        <center>
+            <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
+                [ ACCESS THE FORTRESS ]
+            </a>
+        </center>
+    </div>
+</body>
+</html>

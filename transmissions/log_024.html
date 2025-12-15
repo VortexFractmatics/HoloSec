@@ -1,56 +1,50 @@
-
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>HoloSec // Ditch Google & Microsoft: Achieve Ironclad HIPAA/GDPR Compliance</title>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HoloSec // Wi-Fi Danger</title>
+    <style>
+        body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
+        h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
+        a { color: #00FF41; text-decoration: none; font-weight: bold; }
+        a:hover { background: #00FF41; color: black; }
+        .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
+        .content { line-height: 1.6; }
+        .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
+        .gumroad-button { background-color: transparent !important; color: #00FF41 !important; border: 1px solid #00FF41 !important; font-family: 'Courier New', monospace !important; }
+        .gumroad-button:hover { background-color: #00FF41 !important; color: #000 !important; box-shadow: 0 0 15px #00FF41; }
+    </style>
+    <script src="https://gumroad.com/js/gumroad.js"></script>
+</head>
+<body>
+    <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
+    <br><br>
+    <div class="terminal-box">
+        <h1>Why VPNs Are Not a Silver Bullet</h1>
+        <div class="meta">ID: 024 // CLEARANCE: BLACK_BOX</div>
+        <div class="content">
+            <h2>The Coffee Shop Trap</h2>
+            <p>You sit down at Starbucks. You connect to "Starbucks_Guest." But is it really Starbucks? Or is it a "Pineapple" device sitting in a hacker's backpack at the next table, intercepting all your traffic? This is a Man-in-the-Middle (MitM) attack.</p>
             
-<style>
-    body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
-    h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
-    .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
-    a { color: #00FF41; text-decoration: none; font-weight: bold; }
-    a:hover { background: #00FF41; color: black; }
-    .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
-    .content { line-height: 1.6; }
-    .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
-    li { margin-bottom: 10px; }
-    .gumroad-button { 
-        background-color: transparent !important; 
-        color: #00FF41 !important; 
-        border: 1px solid #00FF41 !important;
-        font-family: 'Courier New', monospace !important;
-    }
-    .gumroad-button:hover {
-        background-color: #00FF41 !important;
-        color: #000 !important;
-        box-shadow: 0 0 15px #00FF41;
-    }
-</style>
+            <h2>"But I use a VPN!"</h2>
+            <p>A VPN encrypts your traffic tunnel, yes. But if the hacker controls the access point, they can attempt to strip the SSL encryption or inject malware into the connection handshake <em>before</em> the VPN fully engages. Or, your VPN might drop for a split second (leak), exposing you.</p>
+            
+            <h2>The Air-Gap Solution</h2>
+            <p>The only way to be 100% safe on public Wi-Fi is to ensure your critical data <em>never touches the Wi-Fi card</em>. With HoloSec, you work out of an encrypted container that has no network permissions. Even if the hacker owns the network, they cannot see inside a vault that is mathematically sealed.</p>
 
-            <script src="https://gumroad.com/js/gumroad.js"></script>
-        </head>
-        <body>
-            <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
-            <br><br>
-            <div class="terminal-box">
-                <h1>Ditch Google & Microsoft: Achieve Ironclad HIPAA/GDPR Compliance</h1>
-                <div class="meta">ID: 024 // CLEARANCE: BLACK_BOX</div>
-                <div class="content">
-                    <p>Signal Lost.</p>
-                    <div class="spec-box">
-                        <strong>ARCHIVE DATA:</strong><br>
-                        > MODULE: Ditch Google & Microsoft<br>
-                        > PROTOCOL: Zero-Knowledge<br>
-                        > STATUS: <span style="color:#00FF41">ACTIVE</span>
-                    </div>
-                </div>
-                <br><br>
-                <center>
-                    <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
-                        [ ACCESS THE FORTRESS ]
-                    </a>
-                </center>
+            <div class="spec-box">
+                <strong>ARCHIVE DATA:</strong><br>
+                > MODULE: Net_Defense<br>
+                > PROTOCOL: Zero_Trust<br>
+                > STATUS: <span style="color:#00FF41">ACTIVE</span>
             </div>
-        </body>
-        </html>
-        
+        </div>
+        <br><br>
+        <center>
+            <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
+                [ ACCESS THE FORTRESS ]
+            </a>
+        </center>
+    </div>
+</body>
+</html>

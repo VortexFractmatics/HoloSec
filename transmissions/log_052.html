@@ -1,56 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HoloSec // Comparison</title>
+    <style>
+        body { background-color: #000; color: #fff; font-family: 'Verdana', sans-serif; padding: 20px; text-align: center; }
+        table { margin: 20px auto; border-collapse: collapse; width: 100%; max-width: 800px; }
+        th, td { border: 1px solid #333; padding: 15px; text-align: center; }
+        th { background: #111; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        .holo { color: #00FF41; font-weight: bold; background: rgba(0, 255, 65, 0.05); }
+        .bad { color: #ff4444; }
+        h1 { font-weight: normal; letter-spacing: 5px; margin-bottom: 40px; }
+        .btn { border: 2px solid #fff; color: #fff; padding: 15px 30px; text-decoration: none; display: inline-block; margin-top: 30px; transition: 0.3s; }
+        .btn:hover { background: #fff; color: #000; }
+    </style>
+</head>
+<body>
+    <a href="../index.html" style="color:#555;">[ RETURN ]</a>
+    <br><br>
+    
+    <h1>THE ARCHITECTURE</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Veracrypt</th>
+                <th>Cloud (Google/DropBox)</th>
+                <th class="holo">HOLOSEC</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Encryption</td>
+                <td>AES-256</td>
+                <td>AES-256 (Managed)</td>
+                <td class="holo">Quantum-Lattice</td>
+            </tr>
+            <tr>
+                <td>Plausible Deniability</td>
+                <td>Yes (Complex)</td>
+                <td class="bad">NO</td>
+                <td class="holo">YES (Native)</td>
+            </tr>
+            <tr>
+                <td>Key Storage</td>
+                <td>RAM (Vulnerable)</td>
+                <td class="bad">Their Server</td>
+                <td class="holo">Sharded (3-of-5)</td>
+            </tr>
+            <tr>
+                <td>Dead Man Switch</td>
+                <td class="bad">NO</td>
+                <td class="bad">NO</td>
+                <td class="holo">YES (Auto-Wipe)</td>
+            </tr>
+            <tr>
+                <td>Duress Mode</td>
+                <td>Hidden Volume</td>
+                <td class="bad">NO</td>
+                <td class="holo">Decoy Vault</td>
+            </tr>
+        </tbody>
+    </table>
 
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>HoloSec // Why Your Encrypted Files Look Like Random White Noise (The Void Protocol Explained)</title>
-            
-<style>
-    body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
-    h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
-    .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
-    a { color: #00FF41; text-decoration: none; font-weight: bold; }
-    a:hover { background: #00FF41; color: black; }
-    .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
-    .content { line-height: 1.6; }
-    .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
-    li { margin-bottom: 10px; }
-    .gumroad-button { 
-        background-color: transparent !important; 
-        color: #00FF41 !important; 
-        border: 1px solid #00FF41 !important;
-        font-family: 'Courier New', monospace !important;
-    }
-    .gumroad-button:hover {
-        background-color: #00FF41 !important;
-        color: #000 !important;
-        box-shadow: 0 0 15px #00FF41;
-    }
-</style>
-
-            <script src="https://gumroad.com/js/gumroad.js"></script>
-        </head>
-        <body>
-            <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
-            <br><br>
-            <div class="terminal-box">
-                <h1>Why Your Encrypted Files Look Like Random White Noise (The Void Protocol Explained)</h1>
-                <div class="meta">ID: 052 // CLEARANCE: BLACK_BOX</div>
-                <div class="content">
-                    <p>Signal Lost.</p>
-                    <div class="spec-box">
-                        <strong>ARCHIVE DATA:</strong><br>
-                        > MODULE: Why Your Encrypted Files Look Like Random White Noise (The Void Protocol Explained)<br>
-                        > PROTOCOL: Zero-Knowledge<br>
-                        > STATUS: <span style="color:#00FF41">ACTIVE</span>
-                    </div>
-                </div>
-                <br><br>
-                <center>
-                    <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
-                        [ ACCESS THE FORTRESS ]
-                    </a>
-                </center>
-            </div>
-        </body>
-        </html>
-        
+    <br>
+    <a href="https://holosec.gumroad.com/l/oemsfb?wanted=true" class="btn">UPGRADE INFRASTRUCTURE</a>
+</body>
+</html>
