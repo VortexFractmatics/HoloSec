@@ -1,0 +1,64 @@
+import os
+import datetime
+
+# --- CONFIGURATION ---
+BASE_URL = "https://holosec.tech"
+TODAY = datetime.date.today().isoformat()
+FOLDER = "transmissions"
+
+def main():
+    print("[*] INITIATING MAP RECALIBRATION...")
+    
+    # 1. SCAN FOR ACTUAL FILES
+    if not os.path.exists(FOLDER):
+        print("   [!] Error: 'transmissions' folder not found.")
+        return
+
+    files = [f for f in os.listdir(FOLDER) if f.endswith('.html')]
+    files.sort()
+    
+    count = len(files)
+    print(f"   > Detected {count} operational files.")
+
+    # 2. BUILD THE XML CONTENT
+    print(f"   > Constructing XML Architecture...")
+    
+    xml_lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+    ]
+    
+    # Add Home Page & Menu
+    xml_lines.append(f"""    <url>
+        <loc>{BASE_URL}/</loc>
+        <lastmod>{TODAY}</lastmod>
+        <priority>1.0</priority>
+    </url>""")
+    
+    xml_lines.append(f"""    <url>
+        <loc>{BASE_URL}/transmissions.html</loc>
+        <lastmod>{TODAY}</lastmod>
+        <priority>0.9</priority>
+    </url>""")
+
+    # Add ONLY the files that exist (1-63)
+    for filename in files:
+        url = f"{BASE_URL}/transmissions/{filename}"
+        xml_lines.append(f"""    <url>
+        <loc>{url}</loc>
+        <lastmod>{TODAY}</lastmod>
+        <priority>0.8</priority>
+    </url>""")
+    
+    xml_lines.append('</urlset>')
+    
+    # 3. OVERWRITE THE FILE
+    with open("sitemap.xml", "w", encoding="utf-8") as f:
+        f.write("\n".join(xml_lines))
+        
+    print(f"   > [SUCCESS] sitemap.xml rewritten.")
+    print(f"   > It now contains exactly {count} transmission links.")
+    print("   > Google will no longer see sectors 64-100.")
+
+if __name__ == "__main__":
+    main()
