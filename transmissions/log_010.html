@@ -1,54 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>HoloSec // Cold Storage</title>
+    <meta charset="UTF-8">
+    <title>HoloSec // LOG: 010</title>
     <style>
-        body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
-        h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
-        a { color: #00FF41; text-decoration: none; font-weight: bold; }
-        a:hover { background: #00FF41; color: black; }
-        .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
-        .content { line-height: 1.6; }
-        .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
-        .gumroad-button { background-color: transparent !important; color: #00FF41 !important; border: 1px solid #00FF41 !important; font-family: 'Courier New', monospace !important; }
-        .gumroad-button:hover { background-color: #00FF41 !important; color: #000 !important; box-shadow: 0 0 15px #00FF41; }
+        body { background-color: #051005; color: #00ff41; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 40px; line-height: 1.5; }
+        .container { max-width: 800px; margin: 0 auto; border-left: 2px solid #113311; padding-left: 20px; }
+        h1 { font-size: 28px; text-transform: uppercase; border-bottom: 1px solid #00ff41; padding-bottom: 10px; margin-bottom: 30px; letter-spacing: 2px; }
+        h2 { color: #88cc88; font-size: 18px; margin-top: 40px; text-transform: uppercase; }
+        p { color: #cccccc; margin-bottom: 20px; text-align: justify; }
+        strong { color: #fff; font-weight: bold; }
+        .nav { margin-bottom: 50px; font-size: 12px; color: #448844; }
+        a { color: #448844; text-decoration: none; }
+        a:hover { color: #00ff41; }
+        .scan-line { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #00ff41, transparent); margin: 30px 0; opacity: 0.3; }
     </style>
-    <script src="https://gumroad.com/js/gumroad.js"></script>
 </head>
 <body>
-    <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
-    <br><br>
-    <div class="terminal-box">
-        <h1>Seed Phrases: Why Paper Wallets Are Not Enough</h1>
-        <div class="meta">ID: 010 // CLEARANCE: BLACK_BOX</div>
-        <div class="content">
-            <h2>The Vulnerability of "Physical" Crypto</h2>
-            <p>Every crypto investor knows the rule: "Not your keys, not your coins." So you buy a Ledger. You write the 24-word seed phrase on a piece of paper. You put it in a safe.</p>
-            <p>But paper burns. Ink fades. Safes can be cracked. And if you travel, you cannot carry that piece of paper through airport security without risking seizure.</p>
-            
-            <h2>Digital Cold Storage</h2>
-            <p>HoloSec allows you to store your seed phrases digitally, but offline. You create a specialized "Wallet Vault" on a USB drive. This vault is protected by our dynamic geometry engine.</p>
-            <ul>
-                <li><strong>Redundancy:</strong> You can make 5 copies of this USB drive.</li>
-                <li><strong>Durability:</strong> Unlike paper, data does not rot.</li>
-                <li><strong>Portability:</strong> You can cross borders with the drive. Even if it is seized and imaged, the data inside is indistinguishable from random noise (Void Protocol).</li>
-            </ul>
-            <p>It is the perfect redundancy layer for high-net-worth holders. It bridges the gap between the fragility of paper and the insecurity of the cloud.</p>
 
-            <div class="spec-box">
-                <strong>ARCHIVE DATA:</strong><br>
-                > MODULE: Seed_Bunker<br>
-                > PROTOCOL: Cold_Storage<br>
-                > STATUS: <span style="color:#00FF41">ACTIVE</span>
-            </div>
-        </div>
-        <br><br>
-        <center>
-            <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
-                [ ACCESS THE FORTRESS ]
-            </a>
-        </center>
+<div class="container">
+    <div class="nav">
+        [ <a href="../index.html">RETURN TO ROOT</a> ] // ACCESSING: LOG_010
     </div>
+
+    <h1>ID: 010 // GRANULAR FORWARD SECRECY</h1>
+
+    <p><strong>SUBJECT:</strong> Why one password is not enough.</p>
+
+    <div class="scan-line"></div>
+
+    <h2>THE CASCADING FAILURE</h2>
+    <p>With standard encryption (like Veracrypt or BitLocker), you have one Master Password. If an attacker tortures you for that password, they gain access to <strong>Everything</strong>. Every file. Past, present, and future.</p>
+
+    <h2>GRANULAR SECRECY</h2>
+    <p>HoloSec introduces <strong>Granular Compartmentalization</strong>. Because every file is locked with a different Time Key:</p>
+    <ul>
+        <li><strong>File A (Locked at 10:00 AM):</strong> Key = Pass + 10:00</li>
+        <li><strong>File B (Locked at 10:05 AM):</strong> Key = Pass + 10:05</li>
+    </ul>
+
+    <h2>THE DEFENSE</h2>
+    <p>If you give the attacker the Password, they still cannot open the files unless they know the <strong>Context (Time)</strong> of each specific file. It turns a "Total Breach" into a "Statistical Grind." They have to crack each file individually.</p>
+
+    <div class="scan-line"></div>
+    <p style="color: #448844; font-size: 10px;">
+        STATUS: DECLASSIFIED<br>
+        AUTHOR: ARCHITECT_ZERO
+    </p>
+</div>
+
 </body>
 </html>

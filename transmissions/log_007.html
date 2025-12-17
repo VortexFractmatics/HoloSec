@@ -1,52 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>HoloSec // The Void Protocol</title>
+    <meta charset="UTF-8">
+    <title>HoloSec // LOG: 007</title>
     <style>
-        body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
-        h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
-        a { color: #00FF41; text-decoration: none; font-weight: bold; }
-        a:hover { background: #00FF41; color: black; }
-        .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
-        .content { line-height: 1.6; }
-        .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
-        .gumroad-button { background-color: transparent !important; color: #00FF41 !important; border: 1px solid #00FF41 !important; font-family: 'Courier New', monospace !important; }
-        .gumroad-button:hover { background-color: #00FF41 !important; color: #000 !important; box-shadow: 0 0 15px #00FF41; }
+        body { background-color: #051005; color: #00ff41; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 40px; line-height: 1.5; }
+        .container { max-width: 800px; margin: 0 auto; border-left: 2px solid #113311; padding-left: 20px; }
+        h1 { font-size: 28px; text-transform: uppercase; border-bottom: 1px solid #00ff41; padding-bottom: 10px; margin-bottom: 30px; letter-spacing: 2px; }
+        h2 { color: #88cc88; font-size: 18px; margin-top: 40px; text-transform: uppercase; }
+        p { color: #cccccc; margin-bottom: 20px; text-align: justify; }
+        strong { color: #fff; font-weight: bold; }
+        .nav { margin-bottom: 50px; font-size: 12px; color: #448844; }
+        a { color: #448844; text-decoration: none; }
+        a:hover { color: #00ff41; }
+        .scan-line { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #00ff41, transparent); margin: 30px 0; opacity: 0.3; }
     </style>
-    <script src="https://gumroad.com/js/gumroad.js"></script>
 </head>
 <body>
-    <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
-    <br><br>
-    <div class="terminal-box">
-        <h1>Beyond Encryption: The Science of "The Void"</h1>
-        <div class="meta">ID: 007 // CLEARANCE: BLACK_BOX</div>
-        <div class="content">
-            <h2>The Flaw of Standard Encryption</h2>
-            <p>If you encrypt a file with standard tools (like 7-Zip AES or basic PGP), you create a "Black Box." It is locked, yes, but it <em>looks</em> like a locked box. A forensic analyst looking at your drive sees a block of data that is clearly encrypted. This is called "High Entropy Data." It screams to the investigator: <em>"Here are the secrets. Start cracking."</em></p>
-            
-            <h2>Obfuscation vs. Encryption</h2>
-            <p>HoloSec utilizes the <strong>Void Protocol</strong>. We do not just encrypt the data; we obfuscate its magnetic signature. We strip the file headers that identify it as an archive. We pad the data with non-repeating noise.</p>
-            
-            <h2>Looking Like Nothing</h2>
-            <p>To a forensic scanning tool (like EnCase or FTK), a HoloSec volume does not look like an encrypted file. It looks like unallocated disk space—random magnetic static. It blends in with the background noise of the drive. The analyst skips over it because it registers as "Empty."</p>
-            
-            <p>You aren't just locking the door; you are removing the door from the wall entirely. If they can't find the container, they can't begin to crack it.</p>
 
-            <div class="spec-box">
-                <strong>ARCHIVE DATA:</strong><br>
-                > MODULE: Void_Obfuscation<br>
-                > PROTOCOL: Entropy_Masking<br>
-                > STATUS: <span style="color:#00FF41">ACTIVE</span>
-            </div>
-        </div>
-        <br><br>
-        <center>
-            <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
-                [ ACCESS THE FORTRESS ]
-            </a>
-        </center>
+<div class="container">
+    <div class="nav">
+        [ <a href="../index.html">RETURN TO ROOT</a> ] // ACCESSING: LOG_007
     </div>
+
+    <h1>ID: 007 // DYNAMIC STATE-VECTORING</h1>
+
+    <p><strong>SUBJECT:</strong> Why we replaced Static S-Boxes with Chaos Logic.</p>
+
+    <div class="scan-line"></div>
+
+    <h2>THE STATIC WEAKNESS</h2>
+    <p>Standard Block Ciphers (like AES) rely on fixed lookup tables (S-Boxes). These are efficient, but they are rigid. If you know the algorithm, the only variable is the key.</p>
+
+    <h2>THE DYNAMIC LATTICE</h2>
+    <p>HoloSec utilizes a proprietary <strong>Dynamic Geometry Engine</strong>. Instead of a fixed lookup table, the engine generates a volatile mathematical structure seeded by the user's entropy.</p>
+    <p>This structure is then permuted using a temporal hash, creating a non-linear stream cipher where the internal state of the encryption evolves every 60 seconds.</p>
+
+    <h2>PROPRIETARY CHAOS</h2>
+    <p>Unlike standard algorithms that use prime factorization (which Quantum Computers target), HoloSec relies on <strong>Combinatorial Chaos</strong>. The encryption logic binds the data to a specific moment in time. Without that temporal coordinate, the mathematical lattice collapses into noise.</p>
+    
+    <p>We do not rely on "Hard Math." We rely on "Missing Physics."</p>
+
+    <div class="scan-line"></div>
+    <p style="color: #448844; font-size: 10px;">
+        STATUS: DECLASSIFIED<br>
+        AUTHOR: ARCHITECT_ZERO
+    </p>
+</div>
+
 </body>
 </html>

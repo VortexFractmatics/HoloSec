@@ -1,51 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>HoloSec // IP Defense</title>
+    <meta charset="UTF-8">
+    <title>HoloSec // LOG: 008</title>
     <style>
-        body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
-        h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
-        a { color: #00FF41; text-decoration: none; font-weight: bold; }
-        a:hover { background: #00FF41; color: black; }
-        .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
-        .content { line-height: 1.6; }
-        .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
-        .gumroad-button { background-color: transparent !important; color: #00FF41 !important; border: 1px solid #00FF41 !important; font-family: 'Courier New', monospace !important; }
-        .gumroad-button:hover { background-color: #00FF41 !important; color: #000 !important; box-shadow: 0 0 15px #00FF41; }
+        body { background-color: #051005; color: #00ff41; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 40px; line-height: 1.5; }
+        .container { max-width: 800px; margin: 0 auto; border-left: 2px solid #113311; padding-left: 20px; }
+        h1 { font-size: 28px; text-transform: uppercase; border-bottom: 1px solid #00ff41; padding-bottom: 10px; margin-bottom: 30px; letter-spacing: 2px; }
+        h2 { color: #88cc88; font-size: 18px; margin-top: 40px; text-transform: uppercase; }
+        p { color: #cccccc; margin-bottom: 20px; text-align: justify; }
+        strong { color: #fff; font-weight: bold; }
+        .nav { margin-bottom: 50px; font-size: 12px; color: #448844; }
+        a { color: #448844; text-decoration: none; }
+        a:hover { color: #00ff41; }
+        .scan-line { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #00ff41, transparent); margin: 30px 0; opacity: 0.3; }
     </style>
-    <script src="https://gumroad.com/js/gumroad.js"></script>
 </head>
 <body>
-    <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
-    <br><br>
-    <div class="terminal-box">
-        <h1>Engineering Defense: Locking Down Blueprints & CAD</h1>
-        <div class="meta">ID: 008 // CLEARANCE: BLACK_BOX</div>
-        <div class="content">
-            <h2>The Multi-Billion Dollar Leak</h2>
-            <p>For engineers, architects, and designers, your CAD files and schematics are your lifeblood. Yet, standard industry practice is to store these on cloud servers (Dropbox, Autodesk Cloud) or local drives protected only by a Windows login.</p>
-            <p>This is negligence. Corporate espionage is rampant. If a competitor gains access to your unreleased prototype files, your patent leverage evaporates instantly.</p>
-            
-            <h2>Air-Gapped Sovereignty</h2>
-            <p>HoloSec is designed to run in a fully air-gapped environment. You can install the engine on a dedicated USB drive and work on your sensitive blueprints on a machine that never touches the internet. The encryption keys are generated from mouse movements (Swarm Entropy), meaning they are truly random and not derived from an online server.</p>
-            
-            <h2>Client Handover Protocol</h2>
-            <p>When you need to transport files to a client, you don't email them. You use HoloSec to create a "Shard Volume." You send the encrypted volume via one channel and the specific QR key via a physical courier. Even if the network is compromised, the files are useless without the physical key.</p>
 
-            <div class="spec-box">
-                <strong>ARCHIVE DATA:</strong><br>
-                > MODULE: Industrial_Defense<br>
-                > PROTOCOL: Air_Gap_Standard<br>
-                > STATUS: <span style="color:#00FF41">ACTIVE</span>
-            </div>
-        </div>
-        <br><br>
-        <center>
-            <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
-                [ ACCESS THE FORTRESS ]
-            </a>
-        </center>
+<div class="container">
+    <div class="nav">
+        [ <a href="../index.html">RETURN TO ROOT</a> ] // ACCESSING: LOG_008
     </div>
+
+    <h1>ID: 008 // RECOVERY DOCTRINES</h1>
+
+    <p><strong>SUBJECT:</strong> Managing the Risk of Time-Loss.</p>
+
+    <div class="scan-line"></div>
+
+    <h2>THE PARADOX</h2>
+    <p>If security is too perfect, the user locks themselves out. If HoloSec requires the exact minute of creation, how do you remember it for 500 files?</p>
+
+    <h2>THE LOCAL VAULT</h2>
+    <p>HoloSec maintains an encrypted SQLite database (`holosec_vault.db`) on the local machine. This acts as your "Keyring." It records the Time Coordinate for every file you lock. When you open the app, it checks this vault and auto-fills the time.</p>
+
+    <h2>THE OFF-SITE BACKUP</h2>
+    <p>HoloSec includes an <strong>Export Vault</strong> function. This dumps your keys into a portable file. We recommend:</p>
+    <ol>
+        <li>Exporting the Vault weekly.</li>
+        <li>Storing it on an air-gapped USB drive.</li>
+        <li>Printing the physical "Time Coordinates" for critical documents (Paper Backup).</li>
+    </ol>
+    <p>If your computer is destroyed, you reinstall HoloSec on a new machine, import the Vault, and regain access. Without the Vault (or paper backup), the data is mathematically unrecoverable.</p>
+
+    <div class="scan-line"></div>
+    <p style="color: #448844; font-size: 10px;">
+        STATUS: DECLASSIFIED<br>
+        AUTHOR: ARCHITECT_ZERO
+    </p>
+</div>
+
 </body>
 </html>

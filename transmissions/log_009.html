@@ -1,55 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>HoloSec // Panic Protocol</title>
+    <meta charset="UTF-8">
+    <title>HoloSec // LOG: 009</title>
     <style>
-        body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
-        h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
-        a { color: #00FF41; text-decoration: none; font-weight: bold; }
-        a:hover { background: #00FF41; color: black; }
-        .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
-        .content { line-height: 1.6; }
-        .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
-        .gumroad-button { background-color: transparent !important; color: #00FF41 !important; border: 1px solid #00FF41 !important; font-family: 'Courier New', monospace !important; }
-        .gumroad-button:hover { background-color: #00FF41 !important; color: #000 !important; box-shadow: 0 0 15px #00FF41; }
+        body { background-color: #051005; color: #00ff41; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 40px; line-height: 1.5; }
+        .container { max-width: 800px; margin: 0 auto; border-left: 2px solid #113311; padding-left: 20px; }
+        h1 { font-size: 28px; text-transform: uppercase; border-bottom: 1px solid #00ff41; padding-bottom: 10px; margin-bottom: 30px; letter-spacing: 2px; }
+        h2 { color: #88cc88; font-size: 18px; margin-top: 40px; text-transform: uppercase; }
+        p { color: #cccccc; margin-bottom: 20px; text-align: justify; }
+        strong { color: #fff; font-weight: bold; }
+        .nav { margin-bottom: 50px; font-size: 12px; color: #448844; }
+        a { color: #448844; text-decoration: none; }
+        a:hover { color: #00ff41; }
+        .scan-line { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #00ff41, transparent); margin: 30px 0; opacity: 0.3; }
     </style>
-    <script src="https://gumroad.com/js/gumroad.js"></script>
 </head>
 <body>
-    <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
-    <br><br>
-    <div class="terminal-box">
-        <h1>The Knock at the Door: Understanding the Panic Button</h1>
-        <div class="meta">ID: 009 // CLEARANCE: BLACK_BOX</div>
-        <div class="content">
-            <h2>Milliseconds Matter</h2>
-            <p>When security is breached—whether it's a physical raid, a network intrusion, or a theft in progress—you do not have time to navigate menus. You do not have time to click "Safely Eject Hardware." You need the data gone, instantly.</p>
-            
-            <h2>The Kill Switch Logic</h2>
-            <p>HoloSec features a global hotkey (The Panic Button). When triggered, the engine executes a three-stage sequence in under 200 milliseconds:</p>
-            <ol>
-                <li><strong>Unmount:</strong> The encrypted volume is forcibly detached from the operating system.</li>
-                <li><strong>RAM Flush:</strong> The encryption keys, which live only in Volatile RAM, are overwritten with zeros.</li>
-                <li><strong>App Termination:</strong> The HoloSec process terminates itself.</li>
-            </ol>
-            
-            <h2>Cold Boot Attack Prevention</h2>
-            <p>Because the keys are flushed from RAM instantly, even a sophisticated "Cold Boot Attack" (freezing the RAM chips to read data after power-off) is mitigated. By the time anyone touches the keyboard, the data is encrypted, the keys are vaporized, and the computer looks like a clean slate.</p>
 
-            <div class="spec-box">
-                <strong>ARCHIVE DATA:</strong><br>
-                > MODULE: Panic_Switch<br>
-                > PROTOCOL: RAM_Purge<br>
-                > STATUS: <span style="color:#00FF41">ACTIVE</span>
-            </div>
-        </div>
-        <br><br>
-        <center>
-            <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
-                [ ACCESS THE FORTRESS ]
-            </a>
-        </center>
+<div class="container">
+    <div class="nav">
+        [ <a href="../index.html">RETURN TO ROOT</a> ] // ACCESSING: LOG_009
     </div>
+
+    <h1>ID: 009 // THE AIR-GAP PROTOCOL</h1>
+
+    <p><strong>SUBJECT:</strong> Sovereign Operation in Zero-Trust Zones.</p>
+
+    <div class="scan-line"></div>
+
+    <h2>THE CLOUD RISK</h2>
+    <p>Most modern security tools require a "Call Home" to validate licenses or store keys. This creates a digital exhaust trail. If you are protecting IP or classified data, the internet is a threat vector.</p>
+
+    <h2>OFFLINE SOVEREIGNTY</h2>
+    <p>HoloSec's core cryptographic engine is fully offline. The Enterprise Build allows for "Silent Activation."</p>
+    <ul>
+        <li>No Telemetry sent to our servers.</li>
+        <li>No Key Backup to the Cloud.</li>
+        <li>No Auto-Updates.</li>
+    </ul>
+
+    <h2>PORTABLE BALLISTICS</h2>
+    <p>HoloSec runs as a standalone binary (`.exe`). It does not require installation into the Windows Registry. You can run it directly from a USB stick on an air-gapped machine, encrypt the files, and pull the USB. No trace is left on the host OS.</p>
+
+    <div class="scan-line"></div>
+    <p style="color: #448844; font-size: 10px;">
+        STATUS: DECLASSIFIED<br>
+        AUTHOR: ARCHITECT_ZERO
+    </p>
+</div>
+
 </body>
 </html>

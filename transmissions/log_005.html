@@ -1,52 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>HoloSec // Steganography</title>
+    <meta charset="UTF-8">
+    <title>HoloSec // LOG: 005</title>
     <style>
-        body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; }
-        h1 { color: #00FF41; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .terminal-box { border: 1px solid #333; padding: 20px; background: rgba(10,10,10,0.8); max-width: 800px; margin: 0 auto; }
-        a { color: #00FF41; text-decoration: none; font-weight: bold; }
-        a:hover { background: #00FF41; color: black; }
-        .meta { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
-        .content { line-height: 1.6; }
-        .spec-box { border: 1px dashed #555; padding: 10px; margin-top: 20px; background: #111; font-size: 0.9em; }
-        .gumroad-button { background-color: transparent !important; color: #00FF41 !important; border: 1px solid #00FF41 !important; font-family: 'Courier New', monospace !important; }
-        .gumroad-button:hover { background-color: #00FF41 !important; color: #000 !important; box-shadow: 0 0 15px #00FF41; }
+        body { background-color: #051005; color: #00ff41; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 40px; line-height: 1.5; }
+        .container { max-width: 800px; margin: 0 auto; border-left: 2px solid #113311; padding-left: 20px; }
+        h1 { font-size: 28px; text-transform: uppercase; border-bottom: 1px solid #00ff41; padding-bottom: 10px; margin-bottom: 30px; letter-spacing: 2px; }
+        h2 { color: #88cc88; font-size: 18px; margin-top: 40px; text-transform: uppercase; }
+        p { color: #cccccc; margin-bottom: 20px; text-align: justify; }
+        strong { color: #fff; font-weight: bold; }
+        .quote { border-left: 3px solid #00ff41; padding-left: 15px; margin: 20px 0; color: #88cc88; font-style: italic; }
+        .nav { margin-bottom: 50px; font-size: 12px; color: #448844; }
+        a { color: #448844; text-decoration: none; }
+        a:hover { color: #00ff41; }
+        .scan-line { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #00ff41, transparent); margin: 30px 0; opacity: 0.3; }
     </style>
-    <script src="https://gumroad.com/js/gumroad.js"></script>
 </head>
 <body>
-    <div class="nav"><a href="../index.html"><< RETURN TO ROOT</a></div>
-    <br><br>
-    <div class="terminal-box">
-        <h1>How to Smuggle Data in a JPEG</h1>
-        <div class="meta">ID: 005 // CLEARANCE: BLACK_BOX</div>
-        <div class="content">
-            <h2>Why encrypting a file isn't enough</h2>
-            <p>If you email a file named <code>TOP_SECRET.docx.aes</code>, you have flagged yourself. Even if they can't read it, they know it's valuable. They will block the email or detain you.</p>
-            
-            <h2>The Art of LSB Injection</h2>
-            <p>HoloSec uses a technique called <strong>Least Significant Bit (LSB) Steganography</strong>. Digital images are made of pixels. Each pixel has color values (Red, Green, Blue). If you change the color value by 1/255th, the human eye literally cannot see the difference.</p>
-            
-            <p>HoloSec takes your sensitive text file (seed phrases, blueprints, contacts) and breaks it down into bits. It then scatters those bits into the invisible color variations of a high-resolution image (like a photo of your dog or a landscape).</p>
-            
-            <h2>The Result</h2>
-            <p>You have a valid .JPG file. It opens in Windows Photo Viewer. It opens in Photoshop. It looks normal. But it carries a payload. You can upload it to Flickr, email it to your mom, or put it on a USB drive. It bypasses Deep Packet Inspection (DPI) because mathematically, it <em>is</em> just an image.</p>
 
-            <div class="spec-box">
-                <strong>ARCHIVE DATA:</strong><br>
-                > MODULE: Pixel_Injection<br>
-                > PROTOCOL: LSB_Shifting<br>
-                > STATUS: <span style="color:#00FF41">ACTIVE</span>
-            </div>
-        </div>
-        <br><br>
-        <center>
-            <a class="gumroad-button" href="https://holosec.gumroad.com/l/oemsfb?wanted=true" target="_blank" style="font-size:1.2em; padding:15px; display:inline-block; text-decoration:none;">
-                [ ACCESS THE FORTRESS ]
-            </a>
-        </center>
+<div class="container">
+    <div class="nav">
+        [ <a href="../index.html">RETURN TO ROOT</a> ] // ACCESSING: LOG_005
     </div>
+
+    <h1>ID: 005 // THE THREE-BODY PROBLEM</h1>
+
+    <p><strong>SUBJECT:</strong> Chaos Theory in Cryptography.</p>
+
+    <div class="scan-line"></div>
+
+    <h2>THE ONE-BODY PROBLEM (BITLOCKER)</h2>
+    <p>Standard encryption is a One-Body Problem. It is predictable. It is static. If you have the mass (password) and the velocity (algorithm), you can calculate the orbit (the key) every single time.</p>
+
+    <h2>THE THREE-BODY PROBLEM (HOLOSEC)</h2>
+    <p>HoloSec introduces a third variable: <strong>Time</strong>. In physics, the Three-Body Problem has no general closed-form solution. The system is chaotic. A tiny change in the starting conditions (Time) results in a wildly different outcome (Key).</p>
+
+    <div class="quote">
+        "Chaos is not randomness. Chaos is higher-order complexity."
+    </div>
+
+    <h2>THE RESULT</h2>
+    <p>By using the unique state-vector of every file as a seed, the engine generates distinct, unrelated keys for every file in the batch. 500 Files = 500 Distinct Event Horizons.</p>
+    <p>We are not building a lock. We are building a labyrinth.</p>
+
+    <div class="scan-line"></div>
+    <p style="color: #448844; font-size: 10px;">
+        STATUS: DECLASSIFIED<br>
+        AUTHOR: ARCHITECT_ZERO
+    </p>
+</div>
+
 </body>
 </html>
