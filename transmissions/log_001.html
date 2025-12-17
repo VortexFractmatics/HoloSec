@@ -41,15 +41,17 @@
         > 03. <strong>The Temporal Coordinate</strong> (The Exact Minute of Creation).
     </p>
 
-<h2>VIRTUAL VOLATILITY</h2>
-    <p>When you lock a file with HoloSec, the derived Encryption Key exists in RAM for approximately 50 milliseconds. Once the encryption is complete, the Key is flushed from memory.</p>
+<h2>VIRTUAL VOLATILITY & THE PHYSICAL VAULT</h2>
+    <p>When you lock a file with HoloSec, the derived Encryption Key exists in RAM for approximately 50 milliseconds. Once the encryption is complete, the Key is flushed from memory and destroyed.</p>
     
     <p>The <strong>Key itself</strong> is never written to the disk or the file header. It simply ceases to exist.</p>
     
-    <p>Instead, HoloSec silently logs the <strong>Time Coordinate</strong> (the "seed") into your encrypted local database (`holosec_vault.db`). To reopen the file, the software retrieves this Time Coordinate from your local vault, asks for your password, and <strong>re-calculates</strong> the key on the fly.</p>
+    <p>Instead, HoloSec logs the <strong>Time Coordinate</strong> (the "seed") into your local database (`holosec_vault.db`). For maximum security, HoloSec allows you to move this vault to <strong>External Physical Storage</strong> (USB, MicroSD, or Air-Gapped Drive).</p>
     
-    <p>We do not need an HSM to store the key, because we store the <em>Recipe</em> (Time), not the <em>Cake</em> (Key).</p>
-
+    <p><strong>The Defensive Result:</strong> Even if an adversary compromises your primary machine and possesses your master password, they remain locked out. The "Time Coordinates" required to reconstruct the keys are physically absent from the hardware. Without the external vault, the files on your drive are mathematically indistinguishable from random noise.</p>
+    
+    <p>We do not store the <em>Cake</em> (The Key); we store the <em>Recipe</em> (The Time)—and you can keep that recipe in your pocket.</p>
+    
     <div class="scan-line"></div>
     <p style="color: #448844; font-size: 10px;">
         STATUS: DECLASSIFIED<br>
