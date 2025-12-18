@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoloSec | Privacy Protocol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@300;400;600;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon: #00FF41;
+            --void: #050505;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--void);
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid var(--border);
+            padding: 40px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        h1, h2 { font-family: 'Space Grotesk', sans-serif; color: white; text-transform: uppercase; margin-bottom: 20px; }
+        h1 { border-bottom: 2px solid var(--neon); padding-bottom: 10px; font-size: 2rem; }
+        h2 { font-size: 1.2rem; color: var(--neon); margin-top: 30px; }
+        p { margin-bottom: 15px; color: #ccc; }
+        .mono { font-family: 'Share Tech Mono', monospace; color: var(--neon); }
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid #444;
+            padding: 10px 20px;
+            transition: 0.3s;
+        }
+        .back-link:hover { color: var(--neon); border-color: var(--neon); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="mono">PRIVACY_PROTOCOL.exe</h1>
+        
+        <p>At <strong>HoloSec</strong>, we believe that privacy is not a feature; it is a fundamental human right. Our architecture is designed to be "decoupled," meaning we have no access to your data or your encryption keys.</p>
+
+        <h2>1. DATA COLLECTION (ZERO FOOTPRINT)</h2>
+        <p>The HoloSec engine runs locally on your machine. We do not transmit your files, your keys, or your keystrokes to any server. Your "Vault" is your own. If you lose your keys, we cannot recover them because we never had them.</p>
+
+        <h2>2. THIRD-PARTY PROCESSING</h2>
+        <p>We use <strong>Gumroad</strong> to process payments and manage our affiliate program. When you purchase a license, Gumroad collects your payment information according to their privacy policy. HoloSec only receives confirmation of purchase to issue your license seat.</p>
+
+        <h2>3. ANALYTICS</h2>
+        <p>Our website uses zero tracking cookies, zero Facebook pixels, and zero Google Analytics. We have no interest in tracking your digital movement. We only track successful license activations for seat-count compliance.</p>
+
+        <h2>4. CONTACT</h2>
+        <p>For transmissions regarding this protocol, contact: <span class="mono">holosecurity@proton.me</span></p>
+
+        <a href="index.html" class="back-link">RETURN TO HUB</a>
+    </div>
+
+</body>
+</html>
